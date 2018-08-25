@@ -12,13 +12,16 @@ function fetchServerResponse(url: string) {
 		return response.json();
 	}).catch((error) => {
 		console.warn('Error loading:', error);
+		return error;
 	});
 }
 
 function* setUrl(action: any) {
-	const data = yield call(fetchServerResponse, action.payload);
-	if (data && data.data) {
-		yield put(scheduleActions.setData(data.data));
+	const result = yield call(fetchServerResponse, action.payload);
+	if (result && result.data) {
+		yield put(scheduleActions.setData(result.data));
+	} else if (result instanceof Error) {
+		yield put(scheduleActions.setError(result.message));
 	}
 }
 

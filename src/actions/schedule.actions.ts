@@ -1,6 +1,7 @@
 const TYPES = {
 	SET_URL: 'SET_URL',
 	SET_DATA: 'SET_DATA',
+	SET_ERROR: 'SET_ERROR',
 };
 
 export default {
@@ -14,5 +15,10 @@ export default {
 	setData: (data: object) => ({
 		type: TYPES.SET_DATA,
 		payload: data
+	}),
+
+	setError: (message: string) => ({
+		type: TYPES.SET_ERROR,
+		payload: message
 	}),
 };
