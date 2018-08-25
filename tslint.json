@@ -13,6 +13,7 @@
 	},
 	"rules": {
 		"linebreak-style": [ true, "LF" ],
-		"indent": [ true, "tabs" ]
+		"indent": [ true, "tabs" ],
+		"jsx-boolean-value": false
 	}
 }
