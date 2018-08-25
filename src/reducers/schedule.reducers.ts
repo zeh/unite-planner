@@ -2,12 +2,12 @@ import scheduleActions from '../actions/schedule.actions';
 
 export const REDUCER_NAME = 'schedule';
 
-interface IState {
-	url?: string,
-	data?: object
+export interface IState {
+	url?: string;
+	data?: object;
 };
 
-const DEFAULT_STATE: IState  = {
+const DEFAULT_STATE: IState = {
 	url: undefined,
 	data: undefined,
 }
