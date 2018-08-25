@@ -31,7 +31,7 @@ class Home extends React.Component<IProps> {
 		} = this.props;
 
 		if (isLoaded && data) {
-			return this.renderDates();
+			return this.renderDates(data);
 		} else if (isLoading) {
 			return this.renderLoading();
 		} else if (errorMessage) {
@@ -41,12 +41,29 @@ class Home extends React.Component<IProps> {
 		return null;
 	}
 
-	private renderDates() {
+	private renderDates(data: any) {
+		const dateBegin = new Date(`${data.event.dateBegin}T00:00:00`);
+		const dateEnd = new Date(`${data.event.dateEnd}T00:00:00`);
+		const dates = [];
+		const tempDate = new Date(dateBegin);
+		while (tempDate.getTime() <= dateEnd.getTime()) {
+			dates.push(new Date(tempDate));
+			tempDate.setDate(tempDate.getDate() + 1);
+		}
+
 		return (
 			<div>
-				Loaded!
+				{ dates.map((date) => this.renderDate(date)) }
 			</div>
-		);
+		)
+	}
+
+	private renderDate(date: Date) {
+		return (
+			<div key={date.getTime()}>
+				{ date.toString() }
+			</div>
+		)
 	}
 
 	private renderLoading() {
