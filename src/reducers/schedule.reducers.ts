@@ -1,7 +1,5 @@
 import scheduleActions from '../actions/schedule.actions';
 
-export const REDUCER_NAME = 'schedule';
-
 export interface IState {
 	isLoaded: boolean;
 	isLoading: boolean;
@@ -16,7 +14,7 @@ const DEFAULT_STATE: IState = {
 	errorMessage: undefined,
 	url: undefined,
 	data: undefined,
-}
+};
 
 export function schedule(state: IState = DEFAULT_STATE, action: any) {
 	switch (action.type) {
