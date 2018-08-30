@@ -1,6 +1,10 @@
+// We need to use require() for json-loader to work correctly (yuck)
+// tslint:disable:no-var-requires
 import { call, put, takeLatest } from 'redux-saga/effects'
 
 import scheduleActions from './../actions/schedule.actions';
+
+const offlineSchedule = require('./../resources/offline_schedule');
 
 function fetchServerResponse(url: string) {
 	return fetch(url, {
@@ -12,7 +16,8 @@ function fetchServerResponse(url: string) {
 		return response.json();
 	}).catch((error) => {
 		console.warn('Error loading:', error);
-		return error;
+		console.warn('Using offline schedule instead (may be out-of-date).');
+		return offlineSchedule;
 	});
 }
 
