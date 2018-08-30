@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+import ScheduleDay from '../../components/schedule-day/ScheduleDay';
 import { IStore } from './../../models';
 
 import * as styles from './Home.css';
@@ -53,16 +54,18 @@ class Home extends React.Component<IProps> {
 
 		return (
 			<div>
-				{ dates.map((date) => this.renderDate(date)) }
+				{ dates.map((date) => this.renderDate(date, data)) }
 			</div>
 		)
 	}
 
-	private renderDate(date: Date) {
+	private renderDate(date: Date, data: object) {
 		return (
-			<div key={date.getTime()}>
-				{ date.toString() }
-			</div>
+			<ScheduleDay
+				key={date.getTime()}
+				date={ date }
+				data= { data }
+			/>
 		)
 	}
 
