@@ -149,6 +149,14 @@ module.exports = {
 							compact: true,
 						},
 					},
+					{
+						test: /\.json$/,
+						include: paths.appSrc,
+						use: [
+							"json-loader"
+							// "webpack-comment-remover-loader",
+						]
+					},
 
 					// Compile .tsx?
 					{
