@@ -7,7 +7,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## TODO
 
 * Show actual data
-* Allow Picking visual options
+* Add polyfills/babel - it's not using any
+  * Use include() (enable in TS)
+* Allow picking visual options
 * Allow selecting specific sessions
 * Printing
 * Saves settings as hash/persistent data
