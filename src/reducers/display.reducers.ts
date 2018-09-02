@@ -12,6 +12,9 @@ export interface IState {
 	showTopics: boolean;
 	showTracks: boolean;
 	showSpeakers: boolean;
+	showFormat: boolean;
+	showAudience: boolean;
+	useLocalTimezone: boolean;
 	columnType: ColumnTypes;
 };
 
@@ -21,6 +24,9 @@ const DEFAULT_STATE: IState = {
 	showTopics: true,
 	showTracks: false,
 	showSpeakers: true,
+	showFormat: false,
+	showAudience: false,
+	useLocalTimezone: false,
 	columnType: ColumnTypes.TRACK,
 };
 
@@ -54,6 +60,24 @@ export function display(state: IState = DEFAULT_STATE, action: any) {
 			return {
 				...state,
 				showSpeakers: action.payload
+			};
+
+		case displayActions.TYPES.SET_SHOW_FORMAT:
+			return {
+				...state,
+				showFormat: action.payload
+			};
+
+		case displayActions.TYPES.SET_SHOW_AUDIENCE:
+			return {
+				...state,
+				showAudience: action.payload
+			};
+
+		case displayActions.TYPES.SET_USE_LOCAL_TIMEZONE:
+			return {
+				...state,
+				useLocalTimeZone: action.payload
 			};
 
 		case displayActions.TYPES.SET_COLUMN_TYPE:
