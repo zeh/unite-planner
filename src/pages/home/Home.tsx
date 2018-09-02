@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+import DisplayOptions from '../../components/display-options/DisplayOptions';
 import ScheduleDay from '../../components/schedule-day/ScheduleDay';
 import Schedule from '../../data/Schedule';
 import { IStore } from './../../models';
@@ -18,7 +19,14 @@ class Home extends React.Component<IProps> {
 	public render() {
 		return (
 			<div className={styles.main}>
-				<h2>Home</h2>
+				<div>
+					<h2>Home</h2>
+					<p>
+						{ 'Welcome. This is a website to help you plan Unite sessions to attend.' }
+					</p>
+					<h3>Options</h3>
+					<DisplayOptions/>
+				</div>
 				{ this.renderData() }
 			</div>
 		);

@@ -1,0 +1,23 @@
+.main {
+	margin: 0;
+	border: 1px solid #aaaaaa;
+}
+
+.form {
+	margin: 0;
+	padding: 0;
+}
+
+.form-row {
+	display: flex;
+	flex-direction: row;
+	align-content: flex-start;
+}
+
+.form-header-column {
+	/* */
+}
+
+.form-field-column {
+	/* */
+}
