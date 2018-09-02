@@ -1,11 +1,12 @@
 import scheduleActions from '../actions/schedule.actions';
+import Schedule from '../data/Schedule';
 
 export interface IState {
 	isLoaded: boolean;
 	isLoading: boolean;
 	errorMessage?: string;
 	url?: string;
-	data?: object;
+	schedule?: Schedule;
 };
 
 const DEFAULT_STATE: IState = {
@@ -13,7 +14,7 @@ const DEFAULT_STATE: IState = {
 	isLoading: false,
 	errorMessage: undefined,
 	url: undefined,
-	data: undefined,
+	schedule: undefined,
 };
 
 export function schedule(state: IState = DEFAULT_STATE, action: any) {
@@ -27,13 +28,13 @@ export function schedule(state: IState = DEFAULT_STATE, action: any) {
 				url: action.payload
 			};
 
-		case scheduleActions.TYPES.SET_DATA:
+		case scheduleActions.TYPES.SET_SCHEDULE:
 			return {
 				...state,
 				isLoading: false,
 				isLoaded: true,
 				errorMessage: undefined,
-				data: action.payload,
+				schedule: action.payload,
 			};
 
 		case scheduleActions.TYPES.SET_ERROR:

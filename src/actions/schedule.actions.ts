@@ -1,6 +1,8 @@
+import Schedule from "../data/Schedule";
+
 const TYPES = {
 	SET_URL: 'SET_URL',
-	SET_DATA: 'SET_DATA',
+	SET_SCHEDULE: 'SET_SCHEDULE',
 	SET_ERROR: 'SET_ERROR',
 };
 
@@ -12,9 +14,9 @@ export default {
 		payload: url
 	}),
 
-	setData: (data: object) => ({
-		type: TYPES.SET_DATA,
-		payload: data
+	setSchedule: (schedule: Schedule) => ({
+		type: TYPES.SET_SCHEDULE,
+		payload: schedule
 	}),
 
 	setError: (message: string) => ({

@@ -2,6 +2,7 @@
 // tslint:disable:no-var-requires
 import { call, put, takeLatest } from 'redux-saga/effects'
 
+import Schedule from '../data/Schedule';
 import scheduleActions from './../actions/schedule.actions';
 
 const offlineSchedule = require('./../resources/offline_schedule');
@@ -18,13 +19,15 @@ function fetchServerResponse(url: string) {
 		console.warn('Error loading:', error);
 		console.warn('Using offline schedule instead (may be out-of-date).');
 		return offlineSchedule;
+	}).then((json: any) => {
+		return Schedule.fromJSON(json);
 	});
 }
 
 function* setUrl(action: any) {
 	const result = yield call(fetchServerResponse, action.payload);
-	if (result && result.data) {
-		yield put(scheduleActions.setData(result.data));
+	if (result) {
+		yield put(scheduleActions.setSchedule(result));
 	} else if (result instanceof Error) {
 		yield put(scheduleActions.setError(result.message));
 	}

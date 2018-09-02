@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+import Schedule from '../../data/Schedule';
 import { ColumnTypes } from "../../reducers/display.reducers";
 import { IStore } from './../../models';
 
 import * as styles from './ScheduleDay.css';
 
 interface IProps {
-	data?: object;
+	schedule?: Schedule;
 	date: Date;
 	showDescription: boolean;
 	showLocation: boolean;

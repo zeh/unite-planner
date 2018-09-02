@@ -2,12 +2,13 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import ScheduleDay from '../../components/schedule-day/ScheduleDay';
+import Schedule from '../../data/Schedule';
 import { IStore } from './../../models';
 
 import * as styles from './Home.css';
 
 interface IProps {
-	data?: object;
+	schedule?: Schedule;
 	isLoading: boolean;
 	isLoaded: boolean;
 	errorMessage?: string;
@@ -28,11 +29,11 @@ class Home extends React.Component<IProps> {
 			isLoaded,
 			isLoading,
 			errorMessage,
-			data,
+			schedule,
 		} = this.props;
 
-		if (isLoaded && data) {
-			return this.renderDates(data);
+		if (isLoaded && schedule) {
+			return this.renderDates(schedule);
 		} else if (isLoading) {
 			return this.renderLoading();
 		} else if (errorMessage) {
@@ -42,29 +43,27 @@ class Home extends React.Component<IProps> {
 		return null;
 	}
 
-	private renderDates(data: any) {
-		const dateBegin = new Date(`${data.event.dateBegin}T00:00:00`);
-		const dateEnd = new Date(`${data.event.dateEnd}T00:00:00`);
+	private renderDates(schedule: Schedule) {
 		const dates = [];
-		const tempDate = new Date(dateBegin);
-		while (tempDate.getTime() <= dateEnd.getTime()) {
+		const tempDate = new Date(schedule.startDate);
+		while (tempDate.getTime() <= schedule.endDate.getTime()) {
 			dates.push(new Date(tempDate));
 			tempDate.setDate(tempDate.getDate() + 1);
 		}
 
 		return (
 			<div>
-				{ dates.map((date) => this.renderDate(date, data)) }
+				{ dates.map((date) => this.renderDate(date, schedule)) }
 			</div>
 		)
 	}
 
-	private renderDate(date: Date, data: object) {
+	private renderDate(date: Date, schedule: Schedule) {
 		return (
 			<ScheduleDay
 				key={date.getTime()}
 				date={ date }
-				data= { data }
+				schedule= { schedule }
 			/>
 		)
 	}
@@ -87,7 +86,7 @@ class Home extends React.Component<IProps> {
 }
 
 const mapStateToProps = (state: IStore) => ({
-	data: state.scheduleState.data,
+	schedule: state.scheduleState.schedule,
 	isLoading: state.scheduleState.isLoading,
 	isLoaded: state.scheduleState.isLoaded,
 	errorMessage: state.scheduleState.errorMessage,
