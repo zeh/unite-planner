@@ -55,7 +55,7 @@ export default {
 		payload: use
 	}),
 
-	setColumns: (columnType: ColumnTypes) => ({
+	setColumnType: (columnType: ColumnTypes) => ({
 		type: TYPES.SET_COLUMN_TYPE,
 		payload: columnType
 	}),
