@@ -16,6 +16,28 @@
 		"indent": [ true, "tabs" ],
 		"jsx-boolean-value": false,
 		"object-literal-sort-keys": false,
-		"no-console": false
+		"no-console": false,
+		"member-ordering": [
+			true,
+			{
+				"order": [
+					"public-static-field",
+					"protected-static-field",
+					"private-static-field",
+					"public-instance-field",
+					"protected-instance-field",
+					"private-instance-field",
+					"public-static-method",
+					"protected-static-method",
+					"private-static-method",
+					"public-constructor",
+					"public-instance-method",
+					"protected-constructor",
+					"protected-instance-method",
+					"private-constructor",
+					"private-instance-method"
+				]
+			}
+		]
 	}
 }
