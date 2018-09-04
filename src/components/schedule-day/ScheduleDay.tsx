@@ -32,43 +32,37 @@ interface IProps {
 
 class ScheduleDay extends React.Component<IProps> {
 	public render() {
-		const { date } = this.props;
+		const { date, schedule } = this.props;
 		const months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
 		const weekDays = [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ];
 		const title = `${months[date.getMonth()]} ${date.getDate()} (${weekDays[date.getDay()]})`;
+		const sessions = schedule ? schedule.sessions.filter((s) => s.date.getTime() === date.getTime()) : [];
+		const columns = this.getColumns(sessions);
 
 		return (
 			<div className={ styles.main }>
 				<div className={ styles.title }>
 					{ title }
 				</div>
-				<div className={ styles.sessions }>
-					{ this.renderHeader() }
-					{ this.renderSessionRows() }
+				<div className={ styles.grid }>
+					{ this.renderHeader(columns) }
+					{ this.renderSessionRows(columns, sessions) }
 				</div>
 			</div>
 		);
 	}
 
-	private renderHeader() {
-		const { date, schedule } = this.props;
-		const sessions = schedule ? schedule.sessions.filter((s) => s.date.getTime() === date.getTime()) : [];
-		const columns = this.getColumns(sessions);
-
+	private renderHeader(columns: IColumnInfo[]) {
 		return (
-			<div className={ cx(styles.row, styles.header) }>
-				<div key={ 'row-header' } className={ styles.column }>
+			<div className={ cx(styles.row, styles.headerRow) }>
+				<div key={ 'column-row-header' } className={ cx(styles.column, styles.headerColumn) }>
 					<div className={ styles.cell }>
-						{ 'Times' }
+						{ 'Time' }
 					</div>
 				</div>
 				{ columns.map((column) => this.renderColumnHeader(column)) }
 			</div>
 		);
-	}
-
-	private renderSessionRows() {
-		return null;
 	}
 
 	private renderColumnHeader(column: IColumnInfo) {
@@ -79,6 +73,98 @@ class ScheduleDay extends React.Component<IProps> {
 				</div>
 			</div>
 		);
+	}
+
+	private renderSessionRows(columns: IColumnInfo[], sessions: Session[]) {
+		// Generates a list of all sessions on all rows first
+		// Each row x col position can have more than one session
+		const sessionGrid: Session[][][] = [];
+		const sessionHeaders: string[] = [];
+		for (let hour = 0; hour < 24; hour++) {
+			const sessionRow: Session[][] = [];
+			for (const column of columns) {
+				const sessionsInColumn = this.getSessionsForColumn(sessions, hour, column.id);
+				sessionRow.push(sessionsInColumn);
+			}
+			sessionGrid.push(sessionRow);
+			sessionHeaders.push(`${hour > 12 ? hour - 12 : hour}:00${hour >= 12 ? 'pm' : 'am'}`);
+		}
+
+		// Remove empty rows in the beginning and end of the list
+		for (let i = 0; i < sessionGrid.length; i++) {
+			const hasAnySession = sessionGrid[i].some((sessionCells) => sessionCells.length > 0);
+			if (hasAnySession) break;
+			sessionGrid.shift();
+			sessionHeaders.shift();
+			i--;
+		}
+
+		for (let i = sessionGrid.length - 1; i >= 0; i--) {
+			const hasAnySession = sessionGrid[i].some((sessionCells) => sessionCells.length > 0);
+			if (hasAnySession) break;
+			sessionGrid.pop();
+			sessionHeaders.pop();
+		}
+
+		// Finally, render them as JSX elements
+		const rows: JSX.Element[] = [];
+		sessionGrid.forEach((sessionRow, index) => {
+			const rowElements: JSX.Element[] = [];
+			sessionRow.forEach((rowSessionCells, columnIndex) => {
+				rowElements.push(
+					<div key={ `column-${columnIndex}` } className={ styles.column }>
+						{ rowSessionCells.map((session) => (
+							<div key={ session.id } className={ styles.cell }>
+								{ session.title }
+							</div>
+						)) }
+					</div>
+				);
+			});
+
+			rows.push(
+				<div key={ `row-${index}` } className={ styles.row }>
+					<div key={ 'column-row-header' } className={ styles.column }>
+						<div className={ styles.cell }>
+							{ sessionHeaders[index] }
+						</div>
+					</div>
+					{ rowElements }
+			</div>
+			);
+		});
+
+		return rows;
+	}
+
+	private getSessionsForColumn(allSessions: Session[], hour: number, columnId: string): Session[] {
+		const { date } = this.props;
+		const startTime = (new Date(date.getTime() + hour * 60 * 60 * 1000)).getTime();
+		const endTime = (new Date(date.getTime() + (hour + 1) * 60 * 60 * 1000)).getTime();
+		const sessions: Session[] = [];
+		for (const session of allSessions) {
+			if (this.sessionMatchesColumnId(session, columnId)) {
+				const sessionStart = session.startTime.getTime();
+				if (sessionStart >= startTime && sessionStart < endTime) {
+					sessions.push(session);
+				}
+			}
+		}
+		return sessions;
+	}
+
+	private sessionMatchesColumnId(session: Session, columnId: string) {
+		const { columnType } = this.props;
+		switch (columnType) {
+			case ColumnTypes.LOCATION:
+				return session.location.id === columnId;
+			case ColumnTypes.TOPIC:
+				return session.topics.some((t) => t.id === columnId);
+			case ColumnTypes.TRACK:
+				return session.tracks.some((t) => t.id === columnId);
+			default:
+				return false;
+		}
 	}
 
 	private getColumns(sessions: Session[]): IColumnInfo[] {
