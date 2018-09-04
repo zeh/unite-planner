@@ -17,6 +17,8 @@ export default class Session {
 	public date: Date;
 	public startTime: Date;
 	public endTime: Date;
+	public startTimeUTC: Date;
+	public endTimeUTC: Date;
 	public timezoneOffset: number;
 	public publishedTime: Date;
 	public description: string[];
@@ -33,8 +35,10 @@ export default class Session {
 		session.audience = new Audience(json.audiencwe, json.audienceID);
 		session.format = new Format(json.format, json.formatID, json.formatDuration);
 		session.date = new Date(`${json.startTime.substr(0, 10)}T00:00:00`);
-		session.startTime = new Date(json.startTimeOffset);
-		session.endTime = new Date(json.endTimeOffset);
+		session.startTime = new Date(json.startTime);
+		session.endTime = new Date(json.endTime);
+		session.startTimeUTC = new Date(json.startTimeOffset);
+		session.endTimeUTC = new Date(json.endTimeOffset);
 		const timezoneOffset = json.startTimeOffset.substr(19, 6).split(':');
 		session.timezoneOffset = Number.parseInt(timezoneOffset[0], 10) * 60 + Number.parseInt(timezoneOffset[1], 10) * -1;
 		session.publishedTime = new Date(json.published);
