@@ -101,7 +101,7 @@ class ScheduleDay extends React.Component<IProps> {
 				locations.push(session.location);
 			}
 			return locations;
-		}, []);
+		}, []).sort(this.sortColumnTitles);
 	}
 
 	private getTopicsFromSessions(sessions: Session[]): Topic[] {
@@ -112,7 +112,7 @@ class ScheduleDay extends React.Component<IProps> {
 				}
 			});
 			return topics;
-		}, []);
+		}, []).sort(this.sortColumnTitles);
 	}
 
 	private getTracksFromSessions(sessions: Session[]): Track[] {
@@ -123,7 +123,15 @@ class ScheduleDay extends React.Component<IProps> {
 				}
 			});
 			return tracks;
-		}, []);
+		}, []).sort(this.sortColumnTitles);
+	}
+
+	private sortColumnTitles(a: IColumnInfo, b: IColumnInfo): number {
+		const na = a.name.toLowerCase();
+		const nb = b.name.toLowerCase();
+		if (na < nb) return -1;
+		if (na > nb) return 1;
+		return 0;
 	}
 }
 

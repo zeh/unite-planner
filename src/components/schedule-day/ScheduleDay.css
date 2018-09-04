@@ -39,4 +39,6 @@
 	flex: 1 1 0;
 	padding: 0.5em;
 	border: 1px solid #dddddd;
+	word-break: break-all;
+	word-break: break-word;
 }
