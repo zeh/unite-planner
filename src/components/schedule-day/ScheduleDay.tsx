@@ -8,6 +8,7 @@ import Session from "../../data/Session";
 import Topic from '../../data/Topic';
 import Track from '../../data/Track';
 import { ColumnTypes } from "../../reducers/display.reducers";
+import SessionBox from "../session-box/SessionBox";
 import { IStore } from './../../models';
 
 import * as styles from './ScheduleDay.css';
@@ -114,9 +115,11 @@ class ScheduleDay extends React.Component<IProps> {
 				rowElements.push(
 					<div key={ `column-${columnIndex}` } className={ styles.column }>
 						{ rowSessionCells.map((session) => (
-							<div key={ session.id } className={ styles.cell }>
-								{ session.title }
-							</div>
+							<SessionBox
+								key={ session.id }
+								className={ styles.cell }
+								session={ session }
+							/>
 						)) }
 					</div>
 				);
