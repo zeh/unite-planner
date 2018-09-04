@@ -7,6 +7,7 @@ export interface IState {
 	errorMessage?: string;
 	url?: string;
 	schedule?: Schedule;
+	selectedSessions: string[];
 };
 
 const DEFAULT_STATE: IState = {
@@ -15,6 +16,7 @@ const DEFAULT_STATE: IState = {
 	errorMessage: undefined,
 	url: undefined,
 	schedule: undefined,
+	selectedSessions: [],
 };
 
 export function schedule(state: IState = DEFAULT_STATE, action: any) {
@@ -43,6 +45,25 @@ export function schedule(state: IState = DEFAULT_STATE, action: any) {
 				isLoading: false,
 				isLoaded: false,
 				errorMessage: action.payload,
+			};
+
+		case scheduleActions.TYPES.SET_SESSION_SELECTED:
+			const { id, selected } = action.payload;
+			return {
+				...state,
+				selectedSessions: selected
+					? [...state.selectedSessions, id]
+					: state.selectedSessions.filter((s) => s !== id)
+			};
+
+		case scheduleActions.TYPES.TOGGLE_SESSION_SELECTED:
+			const sessionId = action.payload;
+			const alreadySelected = state.selectedSessions.indexOf(sessionId) > -1;
+			return {
+				...state,
+				selectedSessions: alreadySelected
+					? state.selectedSessions.filter((s) => s !== sessionId)
+					: [...state.selectedSessions, sessionId]
 			};
 
 		default:
