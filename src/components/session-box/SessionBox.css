@@ -5,6 +5,11 @@
 	flex-direction: row;
 	display: flex;
 	flex-direction: column;
+	cursor: pointer;
+}
+
+.selected {
+	background-color: green;
 }
 
 .infoTopics {

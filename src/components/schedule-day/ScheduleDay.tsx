@@ -2,6 +2,7 @@ import * as cx from 'classnames';
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+import scheduleActions from '../../actions/schedule.actions';
 import Location from '../../data/Location';
 import Schedule from '../../data/Schedule';
 import Session from "../../data/Session";
@@ -29,9 +30,15 @@ interface IProps {
 	showFormat: boolean;
 	showAudience: boolean;
 	columnType: ColumnTypes;
+	dispatchToggleSessionSelected: (sessionId: string) => void;
 }
 
 class ScheduleDay extends React.Component<IProps> {
+	constructor(props: IProps) {
+		super(props);
+		this.onClickSession = this.onClickSession.bind(this);
+	}
+
 	public render() {
 		const { date, schedule } = this.props;
 		const months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
@@ -119,6 +126,7 @@ class ScheduleDay extends React.Component<IProps> {
 								key={ session.id }
 								className={ styles.cell }
 								session={ session }
+								onClick={ this.onClickSession }
 							/>
 						)) }
 					</div>
@@ -222,6 +230,10 @@ class ScheduleDay extends React.Component<IProps> {
 		if (na > nb) return 1;
 		return 0;
 	}
+
+	private onClickSession(session: Session) {
+		this.props.dispatchToggleSessionSelected(session.id);
+	}
 }
 
 const mapStateToProps = (state: IStore) => ({
@@ -235,4 +247,9 @@ const mapStateToProps = (state: IStore) => ({
 	columnType: state.displayState.columnType,
 });
 
-export default connect(mapStateToProps)(ScheduleDay)
+const mapDispatchToProps = (dispatch: any) => ({
+	dispatchToggleSessionSelected: (sessionId: string) => dispatch(scheduleActions.toggleSessionSelected(sessionId)),
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScheduleDay)

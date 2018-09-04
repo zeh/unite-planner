@@ -12,14 +12,15 @@ interface IProps {
 	className?: string;
 	session: Session;
 	onClick?: (session: Session) => void;
-	showDescription: boolean;
-	showLocation: boolean;
-	showTopics: boolean;
-	showTracks: boolean;
-	showSpeakers: boolean;
-	showFormat: boolean;
-	showAudience: boolean;
-	columnType: ColumnTypes;
+	showDescription?: boolean;
+	showLocation?: boolean;
+	showTopics?: boolean;
+	showTracks?: boolean;
+	showSpeakers?: boolean;
+	showFormat?: boolean;
+	showAudience?: boolean;
+	columnType?: ColumnTypes;
+	isSelected?: boolean;
 }
 
 class SessionBox extends React.Component<IProps> {
@@ -40,10 +41,11 @@ class SessionBox extends React.Component<IProps> {
 			showSpeakers,
 			showFormat,
 			showAudience,
+			isSelected,
 		} = this.props;
 
 		return (
-			<div className={ cx(className, styles.main) } onClick={ this.onClick }>
+			<div className={ cx(className, styles.main, isSelected ? styles.selected : undefined) } onClick={ this.onClick }>
 				<div>
 					{ session.title }
 				</div>
@@ -103,7 +105,7 @@ class SessionBox extends React.Component<IProps> {
 	}
 }
 
-const mapStateToProps = (state: IStore) => ({
+const mapStateToProps = (state: IStore, props: IProps) => ({
 	showDescription: state.displayState.showDescription,
 	showLocation: state.displayState.showLocation,
 	showTopics: state.displayState.showTopics,
@@ -112,6 +114,7 @@ const mapStateToProps = (state: IStore) => ({
 	showFormat: state.displayState.showFormat,
 	showAudience: state.displayState.showAudience,
 	columnType: state.displayState.columnType,
+	isSelected: state.scheduleState.selectedSessions.indexOf(props.session.id) > -1
 });
 
 export default connect(mapStateToProps)(SessionBox)
