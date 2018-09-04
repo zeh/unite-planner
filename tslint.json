@@ -12,6 +12,7 @@
 		]
 	},
 	"rules": {
+		"curly": false,
 		"linebreak-style": [ true, "LF" ],
 		"indent": [ true, "tabs" ],
 		"jsx-boolean-value": false,
