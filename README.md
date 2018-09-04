@@ -6,10 +6,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## TODO
 
-* Show actual data
+* Make CSS support less idiotic (e.g. allow nesting)
 * Add polyfills/babel - it's not using any
   * Use include() (enable in TS)
 * Allow picking visual options
+  * Add support for `useLocalTimezone`
 * Allow selecting specific sessions
 * Printing
 * Saves settings as hash/persistent data
