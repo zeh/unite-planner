@@ -12,9 +12,6 @@ Currently, it features [Unite LA](https://unite.unity.com/2018/los-angeles)'s sc
 * Allow picking visual options
   * Add support for `useLocalTimezone`
 * Allow selecting specific sessions
-* Printing
-  * Print DIV only: https://stackoverflow.com/questions/468881/print-div-id-printarea-div-only
-  * Define page breaks: https://stackoverflow.com/questions/21269836/how-to-define-page-breaks-when-printing-html
 * Saves settings as hash/persistent data
 * Add Google Analytics
 
