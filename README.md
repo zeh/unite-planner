@@ -1,8 +1,8 @@
 # Unite Planner
 
-This is the source to website that help one plan around which sessions to visit from [Unite LA](https://unite.unity.com/2018/los-angeles). In the future, this might be adapted to work for every Unite conference.
+This is the source code behind [uniteplanner.com](https://uniteplanner.com/), a website that helps visitors plan around which sessions to watch from [Unity's Unite Conference](https://unite.unity.com/).
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) and [Create React App TypeScript](https://github.com/wmonk/create-react-app-typescript).
+Currently, it features [Unite LA](https://unite.unity.com/2018/los-angeles)'s schedule. In the future, this might be adapted to work with other Unite conferences.
 
 ## TODO
 
@@ -13,13 +13,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
   * Add support for `useLocalTimezone`
 * Allow selecting specific sessions
 * Printing
+  * Print DIV only: https://stackoverflow.com/questions/468881/print-div-id-printarea-div-only
+  * Define page breaks: https://stackoverflow.com/questions/21269836/how-to-define-page-breaks-when-printing-html
 * Saves settings as hash/persistent data
 * Add Google Analytics
-* Deploy with [Netlify](https://github.com/csepulv/electron-with-create-react-app/blob/master/create-react-app-readme.md#netlify)
 
 ## Contributing
 
-Pull requests and issues are welcomed.
+Pull requests and issue creation are welcomed.
 
 ## Development
 
@@ -37,8 +38,13 @@ Pull requests and issues are welcomed.
 
 3. Modify files as needed
 
-4. Build a release version
 
-    ```shell
-    yarn build
-    ```
+## Disclaimers
+
+This project is not associated with or supported by Unity Technologies.
+
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) and [Create React App TypeScript](https://github.com/wmonk/create-react-app-typescript).
+
+## License
+
+[MIT](LICENSE.md).
