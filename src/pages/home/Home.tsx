@@ -60,7 +60,7 @@ class Home extends React.Component<IProps> {
 		}
 
 		return (
-			<div>
+			<div className={ styles.schedules }>
 				{ dates.map((date) => this.renderDate(date, schedule)) }
 			</div>
 		)

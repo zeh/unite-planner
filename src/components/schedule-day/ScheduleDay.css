@@ -3,6 +3,16 @@
 	border: 1px solid #aaaaaa;
 }
 
+@media print {
+	.main {
+		page-break-before: always;
+	}
+
+	.main:first-child {
+		page-break-before: avoid;
+	}
+}
+
 .title {
 	font-size: 2em;
 }
