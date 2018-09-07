@@ -70,8 +70,8 @@ class SessionBox extends React.Component<IProps> {
 				}
 				{ showTracks && columnType !== ColumnTypes.TRACK &&
 					<div>
-						{ session.topics.map((topic) => (
-							<div key={ topic.id }>{ topic.name }</div>
+						{ session.tracks.map((track) => (
+							<div key={ track.id }>{ track.name }</div>
 						)) }
 					</div>
 				}
