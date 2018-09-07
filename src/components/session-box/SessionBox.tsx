@@ -46,16 +46,16 @@ class SessionBox extends React.Component<IProps> {
 
 		return (
 			<div className={ cx(className, styles.main, isSelected ? styles.selected : undefined) } onClick={ this.onClick }>
-				<div>
+				<div className={ styles.infoTitle }>
 					{ session.title }
 				</div>
 				{ showLocation && columnType !== ColumnTypes.LOCATION &&
-					<div>
+					<div className={ styles.infoLocation }>
 						{ `(${session.location.name})` }
 					</div>
 				}
 				{ showDescription &&
-					<div>
+					<div className={ styles.infoDescription }>
 						{ session.description.map((paragraph) => (
 							<p key={ paragraph }>{ paragraph }</p>
 						)) }
@@ -69,27 +69,27 @@ class SessionBox extends React.Component<IProps> {
 					</div>
 				}
 				{ showTracks && columnType !== ColumnTypes.TRACK &&
-					<div>
+					<div className={ styles.infoTrack }>
 						{ session.tracks.map((track) => (
-							<div key={ track.id }>{ track.name }</div>
+							<div key={ track.id }>{ `🚆 ${track.name}` }</div>
 						)) }
 					</div>
 				}
-				{ showSpeakers &&
-					<div>
-						{ session.speakers.map((speaker) => (
-							<div key={ speaker.id }>{ `${speaker.firstName} ${speaker.lastName}, ${speaker.company}` }</div>
-						)) }
-					</div>
-				}
-				{ showFormat &&
-					<div>
-						{ `${session.format.name} (${session.format.duration}min)` }
+				{ showFormat && session.format && session.format.name &&
+					<div className={ styles.infoFormat }>
+						{ `👨‍🏫️ ${session.format.name}` }
 					</div>
 				}
 				{ showAudience &&
-					<div>
-						{ session.audience.name }
+					<div className={ styles.infoAudience }>
+						{ `🎓 Audience: ${session.audience.name}` }
+					</div>
+				}
+				{ showSpeakers &&
+					<div className={ styles.infoSpeakers }>
+						{ session.speakers.map((speaker) => (
+							<p key={ speaker.id }>{ `👤 ${speaker.firstName} ${speaker.lastName}${speaker.company ? `, ${speaker.company}` : ''}` }</p>
+						)) }
 					</div>
 				}
 			</div>
