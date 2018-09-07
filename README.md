@@ -13,7 +13,6 @@ Currently, it features [Unite LA](https://unite.unity.com/2018/los-angeles)'s sc
   * Add support for `useLocalTimezone`
 * Allow selecting specific sessions
 * Saves settings as hash/persistent data
-* Add Google Analytics
 
 ## Contributing
 
