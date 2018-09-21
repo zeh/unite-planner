@@ -35,6 +35,9 @@ class Home extends React.Component<IProps> {
 						With many presentations happening in parallel, it's hard to decide which one to attend. So my aim with this website was to make that decision easier.
 					</p>
 					<p>
+						To toggle whether a session is selected or not, just click the session. This selection action is merely visual and has no othr effect. Selected sessions are remembered the next time you visit the website, as are any display options.
+					</p>
+					<p>
 						All conferences are loaded from Unite's website and listed below. They can be organized by track, topic, or location.
 						You can also <a href="#" onClick={this.printPage}>print the spreadsheet</a> once you're happy with your selection. When printing, the schedule tables are the only elements visible.
 					</p>
@@ -43,7 +46,9 @@ class Home extends React.Component<IProps> {
 					<h3>Options</h3>
 					<DisplayOptions/>
 				</div>
-				{ this.renderData() }
+				<div className={styles.content}>
+					{ this.renderData() }
+				</div>
 			</div>
 		);
 	}
