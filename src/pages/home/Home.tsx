@@ -32,14 +32,14 @@ class Home extends React.Component<IProps> {
 					<p>Welcome. This is a simple website to help you plan <a href="https://unite.unity.com/2018/los-angeles" target="_blank">Unite Los Angeles 2018</a> sessions to attend.</p>
 					<p>
 						While the conference's website already features a schedule, planning your time around it is somewhat difficult since they're displayed sequentially, rather than as a time sheet.
-						With many presentations happening in parallel, it's hard to decide which one to attend. So my aim with this website was to make that decision easier.
+						With many presentations happening in parallel, it's hard to decide which one to attend. My aim with this website was to make that kind of decision easier.
 					</p>
 					<p>
-						To toggle whether a session is selected or not, just click the session. This selection action is merely visual and has no othr effect. Selected sessions are remembered the next time you visit the website, as are any display options.
+						To toggle whether a session is selected or not, just click the session. This selection action is merely visual and has no other effect. Selected sessions are remembered the next time you visit the website. Other display options are also remembered.
 					</p>
 					<p>
 						All conferences are loaded from Unite's website and listed below. They can be organized by track, topic, or location.
-						You can also <a href="#" onClick={this.printPage}>print the spreadsheet</a> once you're happy with your selection. When printing, the schedule tables are the only elements visible.
+						You can also <a href="#" onClick={this.printPage}>print the spreadsheet</a> once you're happy with your selection.
 					</p>
 					<p>Finally, the source code for this page <a href="https://github.com/zeh/unite-planner" target="_blank">is available on GitHub</a>. In the future, this application will be updated to support upcoming Unite conferences. In the meantime, feel free to suggest features, or provide bug reports.</p>
 					<p><small>This website comes with no guarantees. The website and its author are not associated with Unite or Unity Technologies in any way. Unity is a trademark of Unity Technologies.</small></p>
