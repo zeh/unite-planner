@@ -7,18 +7,18 @@
 	padding: 0;
 }
 
-.form-row {
+.formRow {
 	display: flex;
 	flex-direction: column;
 	align-content: flex-start;
 	margin-bottom: 1em;
 }
 
-.form-header-cell {
+.formHeaderCell {
 	/* margin-top: 1em; */
 }
 
-.form-field-cell {
+.formFieldCell {
 	display: flex;
 	font-size: 0.9em;
 	flex-direction: row;

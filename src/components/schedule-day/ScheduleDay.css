@@ -39,6 +39,10 @@
 
 .headerRow {
 	background-color: #eeeeee;
+
+	& .cell {
+		align-self: center;
+	}
 }
 
 .column {
@@ -50,7 +54,21 @@
 
 	&:first-child {
 		border-left: none;
+		flex: 0 0 80px;
+		font-size: 0.8em;
 	}
+}
+
+.columnTwo {
+	flex: 2 1 0;
+}
+
+.columnThree {
+	flex: 3 1 0;
+}
+
+.columnFour {
+	flex: 4 1 0;
 }
 
 .headerColumn {

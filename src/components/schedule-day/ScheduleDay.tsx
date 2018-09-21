@@ -34,6 +34,8 @@ interface IProps {
 }
 
 class ScheduleDay extends React.Component<IProps> {
+	private columnConcurrentSessionCache = new Map<string, number>();
+
 	constructor(props: IProps) {
 		super(props);
 		this.onClickSession = this.onClickSession.bind(this);
@@ -53,14 +55,14 @@ class ScheduleDay extends React.Component<IProps> {
 					{ title }
 				</div>
 				<div className={ styles.grid }>
-					{ this.renderHeader(columns) }
+					{ this.renderHeader(columns, sessions) }
 					{ this.renderSessionRows(columns, sessions) }
 				</div>
 			</div>
 		);
 	}
 
-	private renderHeader(columns: IColumnInfo[]) {
+	private renderHeader(columns: IColumnInfo[], sessions: Session[]) {
 		return (
 			<div className={ cx(styles.row, styles.headerRow) }>
 				<div key={ 'column-row-header' } className={ cx(styles.column, styles.headerColumn) }>
@@ -68,14 +70,14 @@ class ScheduleDay extends React.Component<IProps> {
 						{ 'Time' }
 					</div>
 				</div>
-				{ columns.map((column) => this.renderColumnHeader(column)) }
+				{ columns.map((column) => this.renderColumnHeader(column, sessions)) }
 			</div>
 		);
 	}
 
-	private renderColumnHeader(column: IColumnInfo) {
+	private renderColumnHeader(column: IColumnInfo, sessions: Session[]) {
 		return (
-			<div key={ column.id } className={ styles.column }>
+			<div key={ column.id } className={ this.getColumnStyles(column, sessions) }>
 				<div className={ styles.cell }>
 					{ column.name }
 				</div>
@@ -88,11 +90,13 @@ class ScheduleDay extends React.Component<IProps> {
 		// Each row x col position can have more than one session
 		const sessionGrid: Session[][][] = [];
 		const sessionHeaders: string[] = [];
+		const sessionColumnStyles: string[] = [];
 		for (let hour = 0; hour < 24; hour++) {
 			const sessionRow: Session[][] = [];
 			for (const column of columns) {
 				const sessionsInColumn = this.getSessionsForColumn(sessions, hour, column.id);
 				sessionRow.push(sessionsInColumn);
+				sessionColumnStyles.push(this.getColumnStyles(column, sessions));
 			}
 			sessionGrid.push(sessionRow);
 			sessionHeaders.push(`${hour > 12 ? hour - 12 : hour}:00${hour >= 12 ? 'pm' : 'am'}`);
@@ -120,7 +124,7 @@ class ScheduleDay extends React.Component<IProps> {
 			const rowElements: JSX.Element[] = [];
 			sessionRow.forEach((rowSessionCells, columnIndex) => {
 				rowElements.push(
-					<div key={ `column-${columnIndex}` } className={ styles.column }>
+					<div key={ `column-${columnIndex}` } className={ sessionColumnStyles[columnIndex] }>
 						{ rowSessionCells.map((session) => (
 							<SessionBox
 								key={ session.id }
@@ -162,6 +166,27 @@ class ScheduleDay extends React.Component<IProps> {
 			}
 		}
 		return sessions;
+	}
+
+	private getColumnStyles(column: IColumnInfo, sessions: Session[]) {
+		let maxConcurrentSessions = 1;
+		if (this.columnConcurrentSessionCache.has(column.id)) {
+			maxConcurrentSessions = this.columnConcurrentSessionCache.get(column.id) || 0;
+		} else {
+			const sessionCounts = new Map<string, number>();
+			for (const session of sessions) {
+				if (this.sessionMatchesColumnId(session, column.id)) {
+					const sessionId = session.startTime.toISOString();
+					const concurrentSessionCount = (sessionCounts.get(sessionId) || 0) + 1;
+					sessionCounts.set(sessionId, concurrentSessionCount);
+					maxConcurrentSessions = Math.max(maxConcurrentSessions, concurrentSessionCount);
+				}
+			}
+			this.columnConcurrentSessionCache.set(column.id, maxConcurrentSessions);
+		}
+		const styleNames = [undefined, styles.columnTwo, styles.columnThree, styles.columnFour];
+		const styleToUse = styleNames[Math.min(maxConcurrentSessions, styleNames.length - 1) - 1];
+		return cx(styles.column, styleToUse);
 	}
 
 	private sessionMatchesColumnId(session: Session, columnId: string) {
