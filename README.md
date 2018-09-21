@@ -6,9 +6,10 @@ Currently, it features [Unite LA](https://unite.unity.com/2018/los-angeles)'s sc
 
 ## TODO
 
+* When listing by topic, understand sessions with empty topics (otherwise they're not visible)
 * Add polyfills/babel - it's not using any
-  * Use include() (enable in TS)
-  * Add support for `useLocalTimezone` for display options
+  * Use array.include() (enable in TS)
+* Add support for `useLocalTimezone` for display options
 
 ## Contributing
 
