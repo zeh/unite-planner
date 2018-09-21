@@ -176,7 +176,7 @@ class ScheduleDay extends React.Component<IProps> {
 			const sessionCounts = new Map<string, number>();
 			for (const session of sessions) {
 				if (this.sessionMatchesColumnId(session, column.id)) {
-					const sessionId = session.startTime.toISOString();
+					const sessionId = session.startTime.toISOString().substr(0, 13);
 					const concurrentSessionCount = (sessionCounts.get(sessionId) || 0) + 1;
 					sessionCounts.set(sessionId, concurrentSessionCount);
 					maxConcurrentSessions = Math.max(maxConcurrentSessions, concurrentSessionCount);
