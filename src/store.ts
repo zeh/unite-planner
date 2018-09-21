@@ -9,7 +9,7 @@ import sagas from './sagas'
 const persistConfig = {
 	key: 'root',
 	storage,
-	whitelist: [ "displayState" ],
+	whitelist: [ "displayState", "sessionsState" ],
 };
 
 const persistedReducers = persistReducer(persistConfig, reducers)

@@ -114,7 +114,7 @@ const mapStateToProps = (state: IStore, props: IProps) => ({
 	showFormat: state.displayState.showFormat,
 	showAudience: state.displayState.showAudience,
 	columnType: state.displayState.columnType,
-	isSelected: state.scheduleState.selectedSessions.indexOf(props.session.id) > -1
+	isSelected: state.sessionsState.selectedSessions.indexOf(props.session.id) > -1
 });
 
 export default connect(mapStateToProps)(SessionBox)

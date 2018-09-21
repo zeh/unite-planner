@@ -2,7 +2,7 @@ import * as cx from 'classnames';
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import scheduleActions from '../../actions/schedule.actions';
+import sessionsActions from '../../actions/sessions.actions';
 import Location from '../../data/Location';
 import Schedule from '../../data/Schedule';
 import Session from "../../data/Session";
@@ -248,7 +248,7 @@ const mapStateToProps = (state: IStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-	dispatchToggleSessionSelected: (sessionId: string) => dispatch(scheduleActions.toggleSessionSelected(sessionId)),
+	dispatchToggleSessionSelected: (sessionId: string) => dispatch(sessionsActions.toggleSessionSelected(sessionId)),
 });
 
 
