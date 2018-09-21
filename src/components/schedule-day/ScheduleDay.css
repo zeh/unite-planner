@@ -6,10 +6,10 @@
 	.main {
 		page-break-before: always;
 		margin: 0;
-	}
 
-	.main:first-child {
-		page-break-before: avoid;
+		&:first-child {
+			page-break-before: avoid;
+		}
 	}
 }
 
@@ -31,10 +31,10 @@
 	align-items: stretch;
 	justify-content: space-around;
 	border-top: 1px solid #bbbbbb;
-}
 
-.row:first-child {
-	border-top: none;
+	&:first-child {
+		border-top: none;
+	}
 }
 
 .headerRow {
@@ -47,10 +47,10 @@
 	flex-direction: row;
 	align-items: stretch;
 	border-left: 1px solid #bbbbbb;
-}
 
-.column:first-child {
-	border-left: none;
+	&:first-child {
+		border-left: none;
+	}
 }
 
 .headerColumn {
@@ -64,8 +64,8 @@
 	word-break: break-all;
 	word-break: break-word;
 	border-left: 1px solid #dddddd;
-}
 
-.cell:first-child {
-	border-left: none;
+	&:first-child {
+		border-left: none;
+	}
 }
