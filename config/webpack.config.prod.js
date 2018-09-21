@@ -1,6 +1,6 @@
 'use strict';
 
-const autoprefixer = require('autoprefixer');
+const autoprefixBrowsers = require('./autoprefixBrowsers');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -222,9 +222,15 @@ module.exports = {
 												ident: 'postcss',
 												plugins: () => [
 													require('postcss-flexbugs-fixes'),
-													autoprefixer({
-														browsers: require('./autoprefixBrowsers'),
-														flexbox: 'no-2009',
+													require('postcss-preset-env')({
+														stage: 1,
+														browsers: autoprefixBrowsers,
+														features: {
+															'nesting-rules': true,
+														},
+														autoprefixer: {
+															flexbox: 'no-2009',
+														}
 													}),
 												],
 											},
