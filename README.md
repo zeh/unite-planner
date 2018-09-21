@@ -6,13 +6,9 @@ Currently, it features [Unite LA](https://unite.unity.com/2018/los-angeles)'s sc
 
 ## TODO
 
-* Make CSS support less idiotic (e.g. allow nesting)
 * Add polyfills/babel - it's not using any
   * Use include() (enable in TS)
-* Allow picking visual options
-  * Add support for `useLocalTimezone`
-* Allow selecting specific sessions
-* Saves settings as hash/persistent data
+  * Add support for `useLocalTimezone` for display options
 
 ## Contributing
 
