@@ -58,10 +58,10 @@ class DisplayOptions extends React.Component<IProps> {
 			<div className={ styles.main }>
 				<form className={ styles.form }>
 					<div className={ styles.formRow }>
-						<div className={ styles.formHeaderColumn }>
+						<div className={ styles.formHeaderCell }>
 							{ 'Organize columns by:' }
 						</div>
-						<div className={ styles.formFieldColumn }>
+						<div className={ styles.formFieldCell }>
 							<DropDown
 								value={ columnType }
 								onChange={ this.onChangeColumnType }
@@ -74,30 +74,30 @@ class DisplayOptions extends React.Component<IProps> {
 						</div>
 					</div>
 					<div className={ styles.formRow }>
-						<div className={ styles.formHeaderColumn }>
-							{ 'Session details:' }
+						<div className={ styles.formHeaderCell }>
+							{ 'Session details to show:' }
 						</div>
-						<div className={ styles.formFieldColumn }>
+						<div className={ styles.formFieldCell }>
 							<CheckBox value={ showDescription } onChange={ this.onChangeShowDescription }>
-								{ 'Show description' }
+								{ 'Description' }
 							</CheckBox>
 							<CheckBox value={ showLocation } onChange={ this.onChangeShowLocation }>
-								{ 'Show location' }
+								{ 'Location' }
 							</CheckBox>
 							<CheckBox value={ showTopics } onChange={ this.onChangeShowTopics }>
-								{ 'Show topics' }
+								{ 'Topics' }
 							</CheckBox>
 							<CheckBox value={ showTracks } onChange={ this.onChangeShowTracks }>
-								{ 'Show track info' }
+								{ 'Track info' }
 							</CheckBox>
 							<CheckBox value={ showSpeakers } onChange={ this.onChangeShowSpeakers }>
-								{ 'Show list of speakers' }
+								{ 'List of speakers' }
 							</CheckBox>
 							<CheckBox value={ showFormat } onChange={ this.onChangeShowFormat }>
-								{ 'Show session format' }
+								{ 'Session format' }
 							</CheckBox>
 							<CheckBox value={ showAudience } onChange={ this.onChangeShowAudience }>
-								{ 'Show target audience' }
+								{ 'Target audience' }
 							</CheckBox>
 						</div>
 					</div>

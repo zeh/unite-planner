@@ -16,14 +16,22 @@ interface IProps {
 }
 
 class Home extends React.Component<IProps> {
+	constructor(props: IProps) {
+		super(props);
+		this.printPage = this.printPage.bind(this);
+	}
+
 	public render() {
 		return (
 			<div className={styles.main}>
 				<div>
 					<h2>Home</h2>
-					<p>
-						{ 'Welcome. This is a website to help you plan Unite sessions to attend.' }
-					</p>
+					<p>Welcome. This is a simple website to help you plan <a href="https://unite.unity.com/2018/los-angeles" target="_blank">Unite Los Angeles 2018</a> sessions to attend.</p>
+					<p>While the conference's website already features a schedule, planning your time around it is somewhat difficult since they're displayed sequentially, rather than as a time sheet.</p>
+					<p>With many presentations happening in parallel, it's hard to decide which one to attend. So my aim with this website was to make that decision easier.</p>
+					<p>All conferences are loaded from Unite's website and listed below. They can be organized by track, topic, or location.</p>
+					<p>You can also <a href="#" onClick={this.printPage}>print the spreadsheet</a> once you're happy with your selection. When printing, the schedule tables are the only elements visible.</p>
+					<p>Finally, the source code for this page <a href="https://github.com/zeh/unite-planner" target="_blank">is available on GitHub</a>. In the future, this application will be updated to support upcoming Unite conferences. In the meantime, feel free to suggest features, or provide bug reports.</p>
 					<h3>Options</h3>
 					<DisplayOptions/>
 				</div>
@@ -90,6 +98,10 @@ class Home extends React.Component<IProps> {
 				{ 'Error loading: ' + message }
 			</div>
 		);
+	}
+
+	private printPage() {
+		window.print();
 	}
 }
 

@@ -1,6 +1,5 @@
 .main {
 	margin: 0;
-	border: 1px solid #aaaaaa;
 }
 
 .form {
@@ -10,14 +9,22 @@
 
 .form-row {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	align-content: flex-start;
+	margin-bottom: 1em;
 }
 
-.form-header-column {
-	/* */
+.form-header-cell {
+	/* margin-top: 1em; */
 }
 
-.form-field-column {
-	/* */
+.form-field-cell {
+	display: flex;
+	font-size: 0.9em;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	& > * {
+		margin: 0.5em;
+	}
 }

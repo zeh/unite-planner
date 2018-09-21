@@ -1,5 +1,10 @@
 .main {
-    padding: 2em 2em;
+	padding: 2em 2em;
+
+	& p {
+		font-size: 1em;
+		line-height: 1.6em;
+	}
 }
 
 @media print {
@@ -8,9 +13,10 @@
 		position: absolute;
 		left: 0;
 		top: 0;
-	}
+		font-size: 0.7em;
 
-	.schedules * {
-		visibility: visible;
+		& * {
+			visibility: visible;
+		}
 	}
 }

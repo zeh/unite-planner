@@ -23,7 +23,7 @@ const DEFAULT_STATE: IState = {
 	showLocation: true,
 	showTopics: true,
 	showTracks: false,
-	showSpeakers: true,
+	showSpeakers: false,
 	showFormat: false,
 	showAudience: false,
 	useLocalTimezone: false,
