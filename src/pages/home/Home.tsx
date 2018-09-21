@@ -24,7 +24,10 @@ class Home extends React.Component<IProps> {
 	public render() {
 		return (
 			<div className={styles.main}>
-				<div>
+				<div className={styles.header}>
+					<h1>Unite Planner</h1>
+				</div>
+				<div className={styles.content}>
 					<h2>Home</h2>
 					<p>Welcome. This is a simple website to help you plan <a href="https://unite.unity.com/2018/los-angeles" target="_blank">Unite Los Angeles 2018</a> sessions to attend.</p>
 					<p>While the conference's website already features a schedule, planning your time around it is somewhat difficult since they're displayed sequentially, rather than as a time sheet.</p>

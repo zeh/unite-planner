@@ -4,6 +4,10 @@ body {
 	font-family: sans-serif;
 }
 
+* {
+	box-sizing: border-box;
+}
+
 @media print {
 	body * {
 		visibility: hidden;
